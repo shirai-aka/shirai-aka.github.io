@@ -3,29 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>論理の塔 - LOGIC TOWER</title>
-  <meta name="description" content="論理クイズゲーム「論理の塔 - LOGIC TOWER」の公式サイトです。">
+  <title>Raimu Okano のアプリ</title>
+  <meta name="description" content="個人開発の iOS アプリ（君の街ねこ・論理の塔ほか）の一覧と、各アプリのサポート・プライバシーポリシーへのリンクです。">
   <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; }
+    :root { --bg:#f8f3ea; --card:#fffdf8; --ink:#3d3028; --sub:#7a6a5c; --line:#e6dccd; --accent:#c9792f;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#17151a; --card:#221f25; --ink:#f1ebe2; --sub:#b4a99c; --line:#3a3540; --accent:#e9a25c; } }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 32px 20px; color: #f5eedb; background: #111425; }
-    main { width: min(680px, 100%); padding: 40px 28px; border: 1px solid #9f8344; background: #181b30; }
-    h1 { margin: 0 0 16px; font-size: clamp(28px, 7vw, 46px); line-height: 1.25; }
-    p { margin: 0 0 28px; color: #d7d0c2; font-size: 18px; line-height: 1.8; }
-    nav { display: flex; flex-wrap: wrap; gap: 12px; }
-    a { display: inline-block; padding: 13px 18px; border: 1px solid #b99a50; color: #fff2c8; text-decoration: none; font-weight: 700; }
-    a:hover, a:focus-visible { background: #2b2f4b; }
+    body { margin:0; background:var(--bg); color:var(--ink); }
+    main { width:min(760px,100%); margin:0 auto; padding:48px 16px 64px; }
+    header h1 { margin:0 0 8px; font-size:clamp(26px,6vw,36px); }
+    header p { margin:0 0 32px; color:var(--sub); line-height:1.7; }
+    ul { list-style:none; margin:0; padding:0; display:grid; gap:14px; }
+    .app { display:flex; gap:16px; align-items:flex-start; padding:18px; background:var(--card); border:1px solid var(--line); border-radius:18px; }
+    .app img { flex:none; border-radius:16px; border:1px solid var(--line); }
+    .app h2 { margin:2px 0 6px; font-size:18px; }
+    .app p { margin:0 0 10px; color:var(--sub); font-size:15px; line-height:1.6; }
+    nav { display:flex; flex-wrap:wrap; gap:8px; }
+    nav a { font-size:14px; font-weight:600; color:var(--accent); text-decoration:none; padding:5px 12px; border:1px solid var(--line); border-radius:999px; }
+    nav a:hover, nav a:focus-visible { background:var(--bg); }
+    footer { margin-top:40px; color:var(--sub); font-size:13px; }
   </style>
 </head>
 <body>
   <main>
-    <h1>論理の塔<br>LOGIC TOWER</h1>
-    <p>条件を整理し、矛盾を見抜いて塔を登る論理クイズゲームです。</p>
-    <nav aria-label="関連リンク">
-      <a href="https://apps.apple.com/jp/app/id6787580667">App Store</a>
-      <a href="/logic-tower-support/support/">サポート</a>
-      <a href="/logic-tower-support/privacy-policy/">プライバシーポリシー</a>
-    </nav>
+    <header>
+      <h1>Raimu Okano のアプリ</h1>
+      <p>個人で作っている iOS アプリです。各アプリのサポートとプライバシーポリシーは、それぞれのリンクから開けます。</p>
+    </header>
+    <ul>
+    <li class="app">
+      <img src="icons/6819033839.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>君の街ねこ</h2>
+        <p>行った街の数だけ、ねこに会える。ご当地ねこを集める図鑑アプリ。</p>
+        <nav aria-label="君の街ねこのリンク"><a href="https://apps.apple.com/jp/app/id6819033839">App Store</a> <a href="/kimi-no-machi-neko-privacy-policy/#support">サポート</a> <a href="/kimi-no-machi-neko-privacy-policy/">プライバシーポリシー</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6787580667.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>論理の塔 - LOGIC TOWER</h2>
+        <p>証言の矛盾を見抜いて塔を登る、短時間で遊べる論理クイズゲーム。</p>
+        <nav aria-label="論理の塔 - LOGIC TOWERのリンク"><a href="https://apps.apple.com/jp/app/id6787580667">App Store</a> <a href="/logic-tower-support/support/">サポート</a> <a href="/logic-tower-support/privacy-policy/">プライバシーポリシー</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6792436110.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>折り紙の動物園</h2>
+        <p>一日に一枚、紙を折る。折る前に、その日の言葉を書き込めるアプリ。</p>
+        <nav aria-label="折り紙の動物園のリンク"><a href="https://apps.apple.com/jp/app/id6792436110">App Store</a> <a href="/origami-zoo-privacy-policy/">サポート</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6810260992.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>ひらめき忍者と 四つの里</h2>
+        <p>忍者たちと物語を進めながら、絵を見て考える子ども向けゲーム。</p>
+        <nav aria-label="ひらめき忍者と 四つの里のリンク"><a href="https://apps.apple.com/jp/app/id6810260992">App Store</a> <a href="/hirameki-ninja-support/">サポート</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6808981639.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>捨てるものリスト</h2>
+        <p>捨てるかどうか、いま決めなくて大丈夫。迷う物を書き留めておくリスト。</p>
+        <nav aria-label="捨てるものリストのリンク"><a href="https://apps.apple.com/jp/app/id6808981639">App Store</a> <a href="/sutemono-list-support/">サポート</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6808952393.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>ドーパミン電卓</h2>
+        <p>ふつうの電卓に、必要以上に派手な演出をつけた電卓アプリ。</p>
+        <nav aria-label="ドーパミン電卓のリンク"><a href="https://apps.apple.com/jp/app/id6808952393">App Store</a> <a href="/overkill-calculator-privacy-policy/">サポート</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6805512169.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>CPT合格ドリル NSCA・NASM対策</h2>
+        <p>パーソナルトレーナー資格 NSCA-CPT・NASM-CPT の分野別問題集。</p>
+        <nav aria-label="CPT合格ドリル NSCA・NASM対策のリンク"><a href="https://apps.apple.com/jp/app/id6805512169">App Store</a> <a href="/cpt-drill-privacy-policy/support.html">サポート</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6759853720.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>TraceFit</h2>
+        <p>運動の記録をためて、ふりかえるためのアプリ。</p>
+        <nav aria-label="TraceFitのリンク"><a href="https://apps.apple.com/jp/app/id6759853720">App Store</a> <a href="/tracefit-privacy-policy/">サポート</a></nav>
+      </div>
+    </li>
+    <li class="app">
+      <img src="icons/6785159794.jpg" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <h2>物忘れチェックリスト</h2>
+        <p>鍵や持ち物の「うっかり」を防ぐ、シンプルなチェックリスト。</p>
+        <nav aria-label="物忘れチェックリストのリンク"><a href="https://apps.apple.com/jp/app/id6785159794">App Store</a></nav>
+      </div>
+    </li>
+    </ul>
+    <footer>© Raimu Okano</footer>
   </main>
 </body>
 </html>
