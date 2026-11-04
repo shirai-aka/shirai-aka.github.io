@@ -3,109 +3,231 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Raimu Okano のアプリ</title>
-  <meta name="description" content="個人開発の iOS アプリ（君の街ねこ・論理の塔ほか）の一覧と、各アプリのサポート・プライバシーポリシーへのリンクです。">
+  <meta name="color-scheme" content="light dark">
+  <title>Raimu Okano のアプリ | Apps by Raimu Okano</title>
+  <meta name="description" content="個人開発の iOS アプリ（君の街ねこ・論理の塔ほか）の一覧と、各アプリのサポート・プライバシーポリシーへのリンクです。A list of indie iOS apps by Raimu Okano with links to support pages and privacy policies.">
   <style>
-    :root { --bg:#f8f3ea; --card:#fffdf8; --ink:#3d3028; --sub:#7a6a5c; --line:#e6dccd; --accent:#c9792f;
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; color-scheme: light dark; }
-    @media (prefers-color-scheme: dark) { :root { --bg:#17151a; --card:#221f25; --ink:#f1ebe2; --sub:#b4a99c; --line:#3a3540; --accent:#e9a25c; } }
+    :root {
+      --bg: #f8f3ea; --card: #fffdf8; --ink: #3d3028; --sub: #7a6a5c; --line: #e6dccd;
+      --accent: #b86a24; --accent-soft: #f6e7d6; --focus: #2b6cb0;
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #17151a; --card: #221f25; --ink: #f1ebe2; --sub: #b4a99c; --line: #3a3540;
+        --accent: #e9a25c; --accent-soft: #342a21; --focus: #8ab4f8; }
+    }
     * { box-sizing: border-box; }
-    body { margin:0; background:var(--bg); color:var(--ink); }
-    main { width:min(760px,100%); margin:0 auto; padding:48px 16px 64px; }
-    header h1 { margin:0 0 8px; font-size:clamp(26px,6vw,36px); }
-    header p { margin:0 0 32px; color:var(--sub); line-height:1.7; }
-    ul { list-style:none; margin:0; padding:0; display:grid; gap:14px; }
-    .app { display:flex; gap:16px; align-items:flex-start; padding:18px; background:var(--card); border:1px solid var(--line); border-radius:18px; }
-    .app img { flex:none; border-radius:16px; border:1px solid var(--line); }
-    .app h2 { margin:2px 0 6px; font-size:18px; }
-    .app p { margin:0 0 10px; color:var(--sub); font-size:15px; line-height:1.6; }
-    nav { display:flex; flex-wrap:wrap; gap:8px; }
-    nav a { font-size:14px; font-weight:600; color:var(--accent); text-decoration:none; padding:5px 12px; border:1px solid var(--line); border-radius:999px; }
-    nav a:hover, nav a:focus-visible { background:var(--bg); }
-    footer { margin-top:40px; color:var(--sub); font-size:13px; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI", Roboto, sans-serif;
+      font-size: 16px; line-height: 1.7; overflow-wrap: anywhere;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible, label:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+    .wrap { width: min(960px, 100%); margin: 0 auto; padding: 0 16px; }
+
+    /* ---- language switch (CSS only) ---- */
+    .lang-input { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; background: var(--card); padding: 3px; font-size: 14px; }
+    .lang-switch label { padding: 4px 14px; border-radius: 999px; cursor: pointer; font-weight: 600; color: var(--sub); }
+    #lang-ja:checked ~ .page label[for="lang-ja"],
+    #lang-en:checked ~ .page label[for="lang-en"] { background: var(--accent); color: #fff; }
+    #lang-ja:focus-visible ~ .page label[for="lang-ja"],
+    #lang-en:focus-visible ~ .page label[for="lang-en"] { outline: 3px solid var(--focus); outline-offset: 2px; }
+    #lang-ja:checked ~ .page [lang="en"] { display: none !important; }
+    #lang-en:checked ~ .page [lang="ja"] { display: none !important; }
+
+    /* ---- header ---- */
+    .site-header { padding: 40px 0 28px; }
+    .site-header .row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    h1 { margin: 0 0 8px; font-size: clamp(26px, 6vw, 36px); line-height: 1.25; }
+    .site-header p { margin: 0; color: var(--sub); max-width: 60ch; }
+
+    /* ---- app grid ---- */
+    .apps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .apps { grid-template-columns: 1fr 1fr; gap: 16px; } }
+    .app { display: flex; gap: 16px; align-items: flex-start; padding: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; }
+    .app .icon { flex: none; width: 72px; height: 72px; border-radius: 16px; border: 1px solid var(--line); display: block; }
+    .app .icon.placeholder { display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-size: 28px; font-weight: 700; }
+    .app .body { min-width: 0; flex: 1; }
+    .app h2 { margin: 2px 0 2px; font-size: 18px; line-height: 1.35; }
+    .app .alt { margin: 0 0 6px; font-size: 13px; color: var(--sub); }
+    .app p.desc { margin: 0 0 10px; color: var(--sub); font-size: 15px; line-height: 1.6; }
+    .app nav { display: flex; flex-wrap: wrap; gap: 8px; }
+    .app nav a { font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+    .app nav a:hover { background: var(--accent-soft); }
+    .app nav a.store { border-color: var(--accent); }
+    .app .note { margin: 8px 0 0; font-size: 13px; color: var(--sub); }
+
+    /* ---- footer ---- */
+    .site-footer { margin: 40px 0 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--sub); font-size: 14px; }
+    .site-footer p { margin: 0 0 6px; }
+    @media (max-width: 480px) {
+      .app { padding: 14px; gap: 12px; }
+      .app .icon { width: 60px; height: 60px; border-radius: 14px; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>Raimu Okano のアプリ</h1>
-      <p>個人で作っている iOS アプリです。各アプリのサポートとプライバシーポリシーは、それぞれのリンクから開けます。</p>
+  <input class="lang-input" type="radio" name="lang" id="lang-ja" checked>
+  <input class="lang-input" type="radio" name="lang" id="lang-en">
+  <div class="page">
+    <header class="site-header wrap">
+      <div class="row">
+        <div>
+          <h1><span lang="ja">Raimu Okano のアプリ</span><span lang="en">Apps by Raimu Okano</span></h1>
+          <p lang="ja">個人で作っている iOS アプリです。各アプリのサポートとプライバシーポリシーは、それぞれのリンクから開けます。</p>
+          <p lang="en">iOS apps I make on my own. Each app’s support page and privacy policy can be opened from the links below.</p>
+        </div>
+        <div class="lang-switch" role="group" aria-label="言語 / Language">
+          <label for="lang-ja">日本語</label>
+          <label for="lang-en">English</label>
+        </div>
+      </div>
     </header>
-    <ul>
-    <li class="app">
-      <img src="icons/6819033839.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>君の街ねこ</h2>
-        <p>行った街の数だけ、ねこに会える。ご当地ねこを集める図鑑アプリ。</p>
-        <nav aria-label="君の街ねこのリンク"><a href="https://apps.apple.com/jp/app/id6819033839">App Store</a> <a href="/kimi-no-machi-neko-privacy-policy/#support">サポート</a> <a href="/kimi-no-machi-neko-privacy-policy/">プライバシーポリシー</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6787580667.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>論理の塔 - LOGIC TOWER</h2>
-        <p>証言の矛盾を見抜いて塔を登る、短時間で遊べる論理クイズゲーム。</p>
-        <nav aria-label="論理の塔 - LOGIC TOWERのリンク"><a href="https://apps.apple.com/jp/app/id6787580667">App Store</a> <a href="/logic-tower-support/support/">サポート</a> <a href="/logic-tower-support/privacy-policy/">プライバシーポリシー</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6792436110.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>折り紙の動物園</h2>
-        <p>一日に一枚、紙を折る。折る前に、その日の言葉を書き込めるアプリ。</p>
-        <nav aria-label="折り紙の動物園のリンク"><a href="https://apps.apple.com/jp/app/id6792436110">App Store</a> <a href="/origami-zoo-privacy-policy/">サポート</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6810260992.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>ひらめき忍者と 四つの里</h2>
-        <p>忍者たちと物語を進めながら、絵を見て考える子ども向けゲーム。</p>
-        <nav aria-label="ひらめき忍者と 四つの里のリンク"><a href="https://apps.apple.com/jp/app/id6810260992">App Store</a> <a href="/hirameki-ninja-support/">サポート</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6808981639.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>捨てるものリスト</h2>
-        <p>捨てるかどうか、いま決めなくて大丈夫。迷う物を書き留めておくリスト。</p>
-        <nav aria-label="捨てるものリストのリンク"><a href="https://apps.apple.com/jp/app/id6808981639">App Store</a> <a href="/sutemono-list-support/">サポート</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6808952393.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>ドーパミン電卓</h2>
-        <p>ふつうの電卓に、必要以上に派手な演出をつけた電卓アプリ。</p>
-        <nav aria-label="ドーパミン電卓のリンク"><a href="https://apps.apple.com/jp/app/id6808952393">App Store</a> <a href="/overkill-calculator-privacy-policy/">サポート</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6805512169.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>CPT合格ドリル NSCA・NASM対策</h2>
-        <p>パーソナルトレーナー資格 NSCA-CPT・NASM-CPT の分野別問題集。</p>
-        <nav aria-label="CPT合格ドリル NSCA・NASM対策のリンク"><a href="https://apps.apple.com/jp/app/id6805512169">App Store</a> <a href="/cpt-drill-privacy-policy/support.html">サポート</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6759853720.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>TraceFit</h2>
-        <p>運動の記録をためて、ふりかえるためのアプリ。</p>
-        <nav aria-label="TraceFitのリンク"><a href="https://apps.apple.com/jp/app/id6759853720">App Store</a> <a href="/tracefit-privacy-policy/">サポート</a></nav>
-      </div>
-    </li>
-    <li class="app">
-      <img src="icons/6785159794.jpg" alt="" width="72" height="72" loading="lazy">
-      <div>
-        <h2>物忘れチェックリスト</h2>
-        <p>鍵や持ち物の「うっかり」を防ぐ、シンプルなチェックリスト。</p>
-        <nav aria-label="物忘れチェックリストのリンク"><a href="https://apps.apple.com/jp/app/id6785159794">App Store</a></nav>
-      </div>
-    </li>
-    </ul>
-    <footer>© Raimu Okano</footer>
-  </main>
+
+    <main class="wrap">
+      <ul class="apps">
+
+        <li class="app">
+          <img class="icon" src="icons/6819033839.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>君の街ねこ</h2>
+            <p class="alt" lang="en">Kimi no Machi Neko</p>
+            <p class="desc" lang="ja">行った街の数だけ、ねこに会える。ご当地ねこを集める図鑑アプリ。</p>
+            <p class="desc" lang="en">Meet a cat in every town you visit. A collection app for local cats.</p>
+            <nav lang="ja" aria-label="君の街ねこのリンク"><a class="store" href="https://apps.apple.com/jp/app/id6819033839">App Store</a> <a href="/kimi-no-machi-neko-privacy-policy/#support">サポート</a> <a href="/kimi-no-machi-neko-privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for 君の街ねこ"><a class="store" href="https://apps.apple.com/jp/app/id6819033839">App Store</a> <a href="/kimi-no-machi-neko-privacy-policy/index.en.html#support">Support</a> <a href="/kimi-no-machi-neko-privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6787580667.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>論理の塔 - LOGIC TOWER</h2>
+            <p class="desc" lang="ja">証言の矛盾を見抜いて塔を登る、短時間で遊べる論理クイズゲーム。</p>
+            <p class="desc" lang="en">Spot the contradictions in the testimonies and climb the tower. A quick-play logic quiz game.</p>
+            <nav lang="ja" aria-label="論理の塔 - LOGIC TOWERのリンク"><a class="store" href="https://apps.apple.com/jp/app/id6787580667">App Store</a> <a href="/logic-tower-support/support/">サポート</a> <a href="/logic-tower-support/privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for 論理の塔 - LOGIC TOWER"><a class="store" href="https://apps.apple.com/jp/app/id6787580667">App Store</a> <a href="/logic-tower-support/support/index.en.html">Support</a> <a href="/logic-tower-support/privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6792436110.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>折り紙の動物園</h2>
+            <p class="alt" lang="en">Origami Zoo</p>
+            <p class="desc" lang="ja">一日に一枚、紙を折る。折る前に、その日の言葉を書き込めるアプリ。</p>
+            <p class="desc" lang="en">Fold one sheet of paper a day. Write the day’s words on it before you fold.</p>
+            <nav lang="ja" aria-label="折り紙の動物園のリンク"><a class="store" href="https://apps.apple.com/jp/app/id6792436110">App Store</a> <a href="/origami-zoo-privacy-policy/">プライバシーポリシー</a> <a href="mailto:shirai.apps@ymail.ne.jp">お問い合わせ</a></nav>
+            <nav lang="en" aria-label="Links for 折り紙の動物園"><a class="store" href="https://apps.apple.com/jp/app/id6792436110">App Store</a> <a href="/origami-zoo-privacy-policy/index.en.html">Privacy Policy</a> <a href="mailto:shirai.apps@ymail.ne.jp">Contact</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6810260992.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>ひらめき忍者と 四つの里</h2>
+            <p class="alt" lang="en">Hirameki Ninja and the Four Villages</p>
+            <p class="desc" lang="ja">忍者たちと物語を進めながら、絵を見て考える子ども向けゲーム。</p>
+            <p class="desc" lang="en">A game for kids: follow the ninjas’ story and think through picture puzzles.</p>
+            <nav lang="ja" aria-label="ひらめき忍者と 四つの里のリンク"><a class="store" href="https://apps.apple.com/jp/app/id6810260992">App Store</a> <a href="/hirameki-ninja-support/support/">サポート</a> <a href="/hirameki-ninja-support/privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for ひらめき忍者と 四つの里"><a class="store" href="https://apps.apple.com/jp/app/id6810260992">App Store</a> <a href="/hirameki-ninja-support/support/index.en.html">Support</a> <a href="/hirameki-ninja-support/privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <div class="icon placeholder" aria-hidden="true">ノ</div>
+          <div class="body">
+            <h2>ノリノリドリル</h2>
+            <p class="alt" lang="en">NoriNori Drill</p>
+            <p class="desc" lang="ja">ふってくる文字や数をタッチして、ABC・さんすう・かんじ・りかを覚える、幼児〜小学校低学年向けドリル。</p>
+            <p class="desc" lang="en">Tap the falling letters and numbers to learn ABC, math, kanji and science. For preschool to early elementary school.</p>
+            <nav lang="ja" aria-label="ノリノリドリルのリンク"><a href="/norinori-drill-support/support/">サポート</a> <a href="/norinori-drill-support/privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for ノリノリドリル"><a href="/norinori-drill-support/support/index.en.html">Support</a> <a href="/norinori-drill-support/privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6808981639.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>捨てるものリスト</h2>
+            <p class="alt" lang="en">Sutemono List</p>
+            <p class="desc" lang="ja">捨てるかどうか、いま決めなくて大丈夫。迷う物を書き留めておくリスト。</p>
+            <p class="desc" lang="en">You don’t have to decide now. A list for the things you’re not sure about throwing away.</p>
+            <nav lang="ja" aria-label="捨てるものリストのリンク"><a class="store" href="https://apps.apple.com/jp/app/id6808981639">App Store</a> <a href="/sutemono-list-support/support/">サポート</a> <a href="/sutemono-list-support/privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for 捨てるものリスト"><a class="store" href="https://apps.apple.com/jp/app/id6808981639">App Store</a> <a href="/sutemono-list-support/support/index.en.html">Support</a> <a href="/sutemono-list-support/privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6808952393.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>ドーパミン電卓</h2>
+            <p class="alt" lang="en">Dopamine Calculator</p>
+            <p class="desc" lang="ja">ふつうの電卓に、必要以上に派手な演出をつけた電卓アプリ。</p>
+            <p class="desc" lang="en">An ordinary calculator with far more flashy effects than it needs.</p>
+            <nav lang="ja" aria-label="ドーパミン電卓のリンク"><a class="store" href="https://apps.apple.com/jp/app/id6808952393">App Store</a> <a href="/overkill-calculator-privacy-policy/#support">サポート</a> <a href="/overkill-calculator-privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for ドーパミン電卓"><a class="store" href="https://apps.apple.com/jp/app/id6808952393">App Store</a> <a href="/overkill-calculator-privacy-policy/index.en.html#support">Support</a> <a href="/overkill-calculator-privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <div class="icon placeholder" aria-hidden="true">ド</div>
+          <div class="body">
+            <h2>ドーパミン学習</h2>
+            <p class="alt" lang="en">Dopamine Learning</p>
+            <p class="desc" lang="ja">派手な演出で復習が続く学習アプリ。英語・第二外国語・古文・漢文・理科を1本で。</p>
+            <p class="desc" lang="en">A study app where flashy effects keep you reviewing. English, second languages, classical Japanese, kanbun and science in one app.</p>
+            <nav lang="ja" aria-label="ドーパミン学習のリンク"><a href="/dopamine-vocab-support/support/">サポート</a> <a href="/dopamine-vocab-support/privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for ドーパミン学習"><a href="/dopamine-vocab-support/support/index.en.html">Support</a> <a href="/dopamine-vocab-support/privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6805512169.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>CPT合格ドリル NSCA・NASM対策</h2>
+            <p class="alt" lang="en">CPT Pass Drill for NSCA / NASM</p>
+            <p class="desc" lang="ja">パーソナルトレーナー資格 NSCA-CPT・NASM-CPT の分野別問題集。</p>
+            <p class="desc" lang="en">Topic-by-topic practice questions for the NSCA-CPT and NASM-CPT personal trainer exams.</p>
+            <nav lang="ja" aria-label="CPT合格ドリル NSCA・NASM対策のリンク"><a class="store" href="https://apps.apple.com/jp/app/id6805512169">App Store</a> <a href="/cpt-drill-privacy-policy/support.html">サポート</a> <a href="/cpt-drill-privacy-policy/">プライバシーポリシー</a></nav>
+            <nav lang="en" aria-label="Links for CPT合格ドリル NSCA・NASM対策"><a class="store" href="https://apps.apple.com/jp/app/id6805512169">App Store</a> <a href="/cpt-drill-privacy-policy/support.en.html">Support</a> <a href="/cpt-drill-privacy-policy/index.en.html">Privacy Policy</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6759853720.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>TraceFit</h2>
+            <p class="desc" lang="ja">運動の記録をためて、ふりかえるためのアプリ。</p>
+            <p class="desc" lang="en">Log your workouts and look back on them.</p>
+            <nav lang="ja" aria-label="TraceFitのリンク"><a class="store" href="https://apps.apple.com/jp/app/id6759853720">App Store</a> <a href="/tracefit-privacy-policy/">プライバシーポリシー</a> <a href="mailto:shirai.apps@ymail.ne.jp">お問い合わせ</a></nav>
+            <nav lang="en" aria-label="Links for TraceFit"><a class="store" href="https://apps.apple.com/jp/app/id6759853720">App Store</a> <a href="/tracefit-privacy-policy/index.en.html">Privacy Policy</a> <a href="mailto:shirai.apps@ymail.ne.jp">Contact</a></nav>
+          </div>
+        </li>
+
+        <li class="app">
+          <img class="icon" src="icons/6785159794.jpg" alt="" width="72" height="72" loading="lazy">
+          <div class="body">
+            <h2>物忘れチェックリスト</h2>
+            <p class="alt" lang="en">Forgetfulness Checklist</p>
+            <p class="desc" lang="ja">鍵や持ち物の「うっかり」を防ぐ、シンプルなチェックリスト。</p>
+            <p class="desc" lang="en">A simple checklist that keeps you from forgetting your keys and belongings.</p>
+            <nav lang="ja" aria-label="物忘れチェックリストのリンク"><a class="store" href="https://apps.apple.com/jp/app/id6785159794">App Store</a> <a href="mailto:shirai.apps@ymail.ne.jp">お問い合わせ</a></nav>
+            <nav lang="en" aria-label="Links for 物忘れチェックリスト"><a class="store" href="https://apps.apple.com/jp/app/id6785159794">App Store</a> <a href="mailto:shirai.apps@ymail.ne.jp">Contact</a></nav>
+          </div>
+        </li>
+
+      </ul>
+    </main>
+
+    <footer class="site-footer wrap">
+      <p lang="ja">お問い合わせ: <a href="mailto:shirai.apps@ymail.ne.jp">shirai.apps@ymail.ne.jp</a></p>
+      <p lang="en">Contact: <a href="mailto:shirai.apps@ymail.ne.jp">shirai.apps@ymail.ne.jp</a></p>
+      <p>© Raimu Okano</p>
+    </footer>
+  </div>
 </body>
 </html>
